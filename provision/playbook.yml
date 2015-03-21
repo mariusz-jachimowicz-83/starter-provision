@@ -2,6 +2,11 @@
 - hosts: starter
   vars:
     #---- postgres ---------------
+    ant_version: 1.9.3
+    maven_version: 3.3.1
+    scala_version: 2.10.3
+    sbt_version: 0.12.4
+
     locale: en_US.UTF-8
     postgresql:
       version: 9.3
@@ -36,38 +41,38 @@
     with_redmon: False
   roles:
     # check https://github.com/rvm/rvm1-ansible as alternative
-    - { role: rbenv, sudo: false }
-    - { role: ruby, sudo: false }
-    - { role: postgres}
-    - { role: Stouts.elasticsearch} 
-    - { role: ansible-redis} 
+    # - { role: rbenv, sudo: false }
+    # - { role: ruby, sudo: false }
+    # - { role: postgres}
+    # - { role: Stouts.elasticsearch} 
+    # - { role: ansible-redis}
+
+
   tasks:
     - name: make sure the system encoding is utf-8
       sudo: yes
       template: src=templates/locale dest=/etc/default/locale
                 owner=root group=root mode=644
 
-    #- include: tasks/apt.yml
-    - include: tasks/pgadmin3.yml
-    - include: tasks/phantomjs.yml
+    - include: tasks/apt.yml
+    #---- db
+    # - include: tasks/pgadmin3.yml
+    # - include: 'tasks/mysql.yml'
+    # - include: 'tasks/mysql-workbench.yml'
+    # - include: 'tasks/mongo.yml'
+
+    # - include: tasks/phantomjs.yml
 
 
-    #- include: tasks/skype.yml
-    
+    - include: 'tasks/jdk.yml'
+    # require java installed
+    - include: tasks/maven.yml
+    #---- js development
+    # - include: 'tasks/node.yml'
+    # - include: 'tasks/bower.yml'
+    # - include: 'tasks/gulp.yml'
 
-    #- include: tasks/db.yml
-    
-
-    #- include:virtualization.yml
-
-
-    #- name: Setup rbenv
-    #  hosts: vagrant
-    #  user: vagrant
-    #  sudo: True
-    #  roles:
-    #    - rbenv
-
-    # - name: bundle install
-    #  shell: 'executable=/bin/bash chdir=/vagrant . "$HOME/.rvm/scripts/rvm" && rvm use --default {{ ruby }} && bundle'
-
+    # - include: 'tasks/sublime.yml'
+    # - include: 'tasks/chrome.yml'
+  handlers:
+    - include: 'handlers/restart_mysql.yml'
