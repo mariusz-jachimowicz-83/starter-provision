@@ -1,0 +1,97 @@
+dir = Dir.pwd
+vagrant_dir = File.expand_path(File.dirname(__FILE__))
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Choose the box. It it does not exists it will be downloaded.
+  #config.vm.box = "ubuntu-12.04-amd64-daily"
+  #config.vm.box = "ubuntu-12.04.4-desktop-amd64"
+  config.vm.box = "clean__ubuntu-12.04.4-desktop-amd64"
+
+  # Set the url for the box.
+  #config.vm.box_url =
+    "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+  
+  # Share folders
+  config.vm.synced_folder "/home/cichy/development_for_vagrant", "/home/vagrant/development"
+
+  # Set the custom installer for VirtualBox Guest Additions.
+  #if vagrant_vbguest_installed
+  #  config.vbguest.installer = CloudUbuntuVagrant
+  #end
+
+  # Set the hostname
+  #config.vm.hostname = "blimp-dev"
+
+  # Enable X11 forwarding
+  config.ssh.forward_x11 = true
+  #config.vm.network :hostonly, "192.168.56.200", :netmask => "255.255.255.0"
+  #config.vm.network :private_network, ip: "192.168.56.200"
+
+  # VirtualBox provider configuration.
+  config.vm.provider :virtualbox do |vb|
+    # Set to true if you want the virtualbox to start the VM's UI
+    vb.gui = true
+
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+    vb.customize ['modifyvm', :id, '--hostonlyadapter2', 'vboxnet0']
+
+    # For a 64-bit VM (courtesy of https://gist.github.com/mikekunze/7486548#file-ubuntu-desktop-vagrantfile)
+    # vb.customize ["modifyvm", :id, "--memory", "2048"]
+      # Set the number of virtual CPUs for the virtual machine
+    # vb.customize ["modifyvm", :id, "--cpus", "2"]
+    # vb.customize ["modifyvm", :id, "--graphicscontroller", "vboxvga"]
+    # vb.customize ["modifyvm", :id, "--vram", "128"]
+      # Enabling the I/O APIC is required for 64-bit guest operating systems, especially Windows Vista;
+      # it is also required if you want to use more than one virtual CPU in a VM.
+    # vb.customize ["modifyvm", :id, "--ioapic", "on"]
+      # Enable the use of hardware virtualization extensions (Intel VT-x or AMD-V) in the processor of your host system
+    # vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
+      # Enable, if Guest Additions are installed, whether hardware 3D acceleration should be available
+    # vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+    #
+    # See Chapter 8. VBoxManage | VirtualBox Manual located @ virtualbox.org/manual/ch08.html
+    # for more information on available options.
+
+  end
+
+  # Provisioning
+  
+  if File.exists?(File.join(vagrant_dir,'provision','provision-pre.sh')) then
+    config.vm.provision :shell, :path => File.join( "provision", "provision-pre.sh" )
+  end
+  
+  if File.exists?(File.join(vagrant_dir,'provision','provision-custom.sh')) then
+    config.vm.provision :shell, :path => File.join( "provision", "provision-custom.sh" )
+  else
+    config.vm.provision :shell, :path => File.join( "provision", "bootstrap.sh" )
+    #config.vm.provision :shell, :path => File.join( "provision", "install__ruby.sh" )
+  end
+  
+  if File.exists?(File.join(vagrant_dir,'provision','provision-post.sh')) then
+    config.vm.provision :shell, :path => File.join( "provision", "provision-post.sh" )
+  end
+
+
+
+
+
+
+  config.vm.define :blimp do |blimp|
+    blimp.vm.network :private_network, ip: "192.168.56.200"
+    blimp.vm.hostname = "blimp-dev"  
+  end
+
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = "provision/playbook.yml"
+    # ansible.inventory_path = "provision/inventory"
+    ansible.inventory_path = "provision/inventory"
+    ansible.sudo = true
+  end
+  
+  #config.vm.define :tmsearch do |tmsearch|
+  #  tmsearch.vm.network :private_network, ip: "192.168.56.201"
+  #  tmsearch.vm.hostname = "tmsearch-dev" 
+  #end
+end

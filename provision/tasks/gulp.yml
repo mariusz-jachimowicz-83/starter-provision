@@ -1,0 +1,3 @@
+---
+- name: Install Gulp
+  shell: npm install -g gulp

@@ -1,0 +1,39 @@
+---
+
+#- name: skype | Add i386 architecture
+#  sudo: yes
+#  shell: dpkg --add-architecture i386
+
+- name: skype | ia32-libs
+  sudo: yes
+  shell: apt-get install ia32-libs
+
+- name: skype | Install dependencies
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+  - libqt4-dbus
+  - libqt4-network
+  - libqt4-xml
+  - libasound2
+  
+- name: skype | Fix any broken depedencies
+  sudo: yes
+  command: apt-get -f -y install
+   
+- name: skype | Download Skype installer
+  get_url: dest="/tmp/skype-ubuntu-64.deb" url="http://www.skype.com/go/getskype-linux-beta-ubuntu-64"
+  
+- name: skype | Install Skype
+  sudo: yes
+  command: dpkg --skip-same-version -i /tmp/skype-ubuntu-64.deb
+  
+- name: skype | Add Skype Wrapper PPA
+  sudo: yes
+  apt_repository: repo=ppa:skype-wrapper/ppa state=present
+  
+- name: skype | Install Skype wrapper
+  apt: pkg={{ item }} state=latest update_cache=yes
+  with_items:
+  - skype-wrapper
+  - python-skype

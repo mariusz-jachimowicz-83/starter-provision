@@ -1,0 +1,6 @@
+---
+- name: UI npm libs
+  shell: npm install ./client
+
+- name: UI bower libs
+  shell: cd client; bower install

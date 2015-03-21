@@ -1,0 +1,6 @@
+---
+- name: install pgadmin3
+  sudo: true
+  apt: name={{ item }} state=latest
+  with_items:
+    - pgadmin3

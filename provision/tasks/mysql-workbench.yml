@@ -1,0 +1,3 @@
+---
+- name: mysql-workbench | Install MySql Workbench
+  apt: pkg=mysql-workbench state=latest

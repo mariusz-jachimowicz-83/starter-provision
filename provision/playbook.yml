@@ -1,0 +1,73 @@
+---
+- hosts: starter
+  vars:
+    #---- postgres ---------------
+    locale: en_US.UTF-8
+    postgresql:
+      version: 9.3
+      repo: 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
+      install_development_headers: true
+
+      pg_username: postgres
+      pg_password: postgres
+
+      user: postgres
+      group: postgres
+
+      config:
+        shared_buffers: 24MB
+        work_mem: 1MB
+
+        checkpoint_segments: 3
+        checkpoint_completion_target: 0.5
+
+        effective_cache_size: 128MB
+    #---- ruby ---------------   
+    #ruby: ruby-1.9.2-p180
+    ruby_version: 2.1.3
+    rbenv_makeopts: ""
+    phantomjs: phantomjs-1.9.0-linux-x86_64
+    dev_db: dev
+    test_db: test
+    deploy: vagrant
+    virtualbox_url: http://download.virtualbox.org/virtualbox/4.3.10/virtualbox-4.3_4.3.10-93012~Ubuntu~raring_amd64.deb
+    virtualbox_deb_package: /tmp/virtualbox.deb
+    #--ansible-redis
+    with_redmon: False
+  roles:
+    # check https://github.com/rvm/rvm1-ansible as alternative
+    - { role: rbenv, sudo: false }
+    - { role: ruby, sudo: false }
+    - { role: postgres}
+    - { role: Stouts.elasticsearch} 
+    - { role: ansible-redis} 
+  tasks:
+    - name: make sure the system encoding is utf-8
+      sudo: yes
+      template: src=templates/locale dest=/etc/default/locale
+                owner=root group=root mode=644
+
+    #- include: tasks/apt.yml
+    - include: tasks/pgadmin3.yml
+    - include: tasks/phantomjs.yml
+
+
+    #- include: tasks/skype.yml
+    
+
+    #- include: tasks/db.yml
+    
+
+    #- include:virtualization.yml
+
+
+    #- name: Setup rbenv
+    #  hosts: vagrant
+    #  user: vagrant
+    #  sudo: True
+    #  roles:
+    #    - rbenv
+
+    # - name: bundle install
+    #  shell: 'executable=/bin/bash chdir=/vagrant . "$HOME/.rvm/scripts/rvm" && rvm use --default {{ ruby }} && bundle'
+
