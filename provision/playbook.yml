@@ -6,7 +6,7 @@
     maven_version: 3.3.1
     #scala_version: 2.10.3
     scala_version: 2.11.5
-    sbt_version: 0.12.4
+    sbt_version: "0.13.8"
 
     locale: en_US.UTF-8
     postgresql:
@@ -48,6 +48,7 @@
     - { role: Stouts.elasticsearch} 
     - { role: ansible-redis}
     - { role: scala}
+    - { role: sbt}
 
 
   tasks:
