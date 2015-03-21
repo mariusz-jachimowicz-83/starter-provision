@@ -1,0 +1,8 @@
+---
+- name: Sublime repo
+  apt_repository: repo='ppa:webupd8team/sublime-text-3' state=present update_cache=yes
+
+- name: Install Sublime Text 3
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - sublime-text-installer

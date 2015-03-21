@@ -56,23 +56,23 @@
 
     - include: tasks/apt.yml
     #---- db
-    # - include: tasks/pgadmin3.yml
-    # - include: 'tasks/mysql.yml'
-    # - include: 'tasks/mysql-workbench.yml'
-    # - include: 'tasks/mongo.yml'
+    - include: tasks/pgadmin3.yml
+    - include: 'tasks/mysql.yml'
+    - include: 'tasks/mysql-workbench.yml'
+    - include: 'tasks/mongo.yml'
 
-    # - include: tasks/phantomjs.yml
+    - include: tasks/phantomjs.yml
 
 
     - include: 'tasks/jdk.yml'
     # require java installed
     - include: tasks/maven.yml
     #---- js development
-    # - include: 'tasks/node.yml'
-    # - include: 'tasks/bower.yml'
-    # - include: 'tasks/gulp.yml'
+    - include: 'tasks/node.yml'
+    - include: 'tasks/bower.yml'
+    - include: 'tasks/gulp.yml'
 
-    # - include: 'tasks/sublime.yml'
-    # - include: 'tasks/chrome.yml'
+    - include: 'tasks/sublime.yml'
+    - include: 'tasks/chrome.yml'
   handlers:
     - include: 'handlers/restart_mysql.yml'
