@@ -4,7 +4,8 @@
     #---- postgres ---------------
     ant_version: 1.9.3
     maven_version: 3.3.1
-    scala_version: 2.10.3
+    #scala_version: 2.10.3
+    scala_version: 2.11.5
     sbt_version: 0.12.4
 
     locale: en_US.UTF-8
@@ -41,11 +42,12 @@
     with_redmon: False
   roles:
     # check https://github.com/rvm/rvm1-ansible as alternative
-    # - { role: rbenv, sudo: false }
-    # - { role: ruby, sudo: false }
-    # - { role: postgres}
-    # - { role: Stouts.elasticsearch} 
-    # - { role: ansible-redis}
+    - { role: rbenv, sudo: false }
+    - { role: ruby, sudo: false }
+    - { role: postgres}
+    - { role: Stouts.elasticsearch} 
+    - { role: ansible-redis}
+    - { role: scala}
 
 
   tasks:
@@ -71,6 +73,7 @@
     - include: 'tasks/node.yml'
     - include: 'tasks/bower.yml'
     - include: 'tasks/gulp.yml'
+
 
     - include: 'tasks/sublime.yml'
     - include: 'tasks/chrome.yml'
