@@ -11,4 +11,4 @@
 - action: shell debconf-set-selections < /root/l2
  
 - name: Install jdk pkg
-  action: apt pkg=oracle-java8-installer state=present
+  action: apt pkg=oracle-{{jdk_version}}-installer state=present

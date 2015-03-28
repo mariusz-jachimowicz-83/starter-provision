@@ -4,6 +4,7 @@
     #---- postgres ---------------
     ant_version: 1.9.3
     maven_version: 3.3.1
+    jdk_version: 8
     #scala_version: 2.10.3
     scala_version: 2.11.5
     sbt_version: "0.13.8"
