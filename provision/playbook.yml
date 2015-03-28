@@ -8,6 +8,7 @@
     scala_version: 2.11.5
     sbt_version: "0.13.8"
     intellij_version: 14.0.3
+    netbeans_version: 8.0.2
     locale: en_US.UTF-8
     postgresql:
       version: 9.3
@@ -78,6 +79,7 @@
 
 
     - include: 'tasks/sublime.yml'
+    - include: 'tasks/netbeans.yml'
     - include: 'tasks/chrome.yml'
   handlers:
     - include: 'handlers/restart_mysql.yml'
