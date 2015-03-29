@@ -7,14 +7,14 @@
 
 - name: Download scala v{{scala_version}}
   get_url: url={{scala_download_url}} 
-    dest=/tmp/{{scala_archive_file}}
+    dest=/home/vagrant/{{scala_archive_file}}
     force=no
 
 - name: Unpack Scala
   command: tar -xvf {{scala_archive_file}} chdir=/tmp/
 
 - name: Move (by force) Scala to lib
-  command: mv /tmp/{{scala_version_name}} {{scala_lib_path_target}} chdir=/tmp/
+  command: cp /home/vagrant/{{scala_version_name}} {{scala_lib_path_target}} chdir=/tmp/
 
 - name: Link scala
   command: ln -sf {{scala_lib_path_target}}/bin/scala {{scala_link_target}}
