@@ -49,9 +49,9 @@
     # - { role: postgres}
     # - { role: Stouts.elasticsearch} 
     # - { role: ansible-redis}
-    # - { role: scala}
+    - { role: scala}
     # - { role: sbt}
-    - { role: intellij}
+    # - { role: intellij}
 
 
   tasks:
