@@ -11,7 +11,7 @@
     force=no
 
 - name: Unpack Scala
-  command: tar -xvf {{scala_archive_file}} chdir=/tmp/
+  command: tar -xvf {{scala_archive_file}} chdir=/home/vagrant/
 
 - name: Move (by force) Scala to lib
   command: cp /home/vagrant/{{scala_version_name}} {{scala_lib_path_target}} chdir=/tmp/
