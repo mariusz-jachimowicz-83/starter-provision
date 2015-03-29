@@ -8,7 +8,7 @@
     #scala_version: 2.10.3
     scala_version: 2.11.5
     sbt_version: "0.13.8"
-    intellij_version: 14.0.3
+    intellij_version: 14.1
     netbeans_version: 8.0.2
     locale: en_US.UTF-8
     postgresql:
@@ -44,13 +44,13 @@
     with_redmon: False
   roles:
     # check https://github.com/rvm/rvm1-ansible as alternative
-    - { role: rbenv, sudo: false }
-    - { role: ruby,  sudo: false }
-    - { role: postgres}
-    - { role: Stouts.elasticsearch} 
-    - { role: ansible-redis}
-    - { role: scala}
-    - { role: sbt}
+    # - { role: rbenv, sudo: false }
+    # - { role: ruby,  sudo: false }
+    # - { role: postgres}
+    # - { role: Stouts.elasticsearch} 
+    # - { role: ansible-redis}
+    # - { role: scala}
+    # - { role: sbt}
     - { role: intellij}
 
 
@@ -61,27 +61,29 @@
                 owner=root group=root mode=644
 
     - include: tasks/apt.yml
-    - include: tasks/svn.yml
+    # - include: tasks/svn.yml
     #---- db
-    - include: tasks/pgadmin3.yml
-    - include: 'tasks/mysql.yml'
-    - include: 'tasks/mysql-workbench.yml'
-    - include: 'tasks/mongo.yml'
+    # - include: tasks/pgadmin3.yml
+    # - include: 'tasks/mysql.yml'
+    # - include: 'tasks/mysql-workbench.yml'
+    # - include: 'tasks/mongo.yml'
 
-    - include: tasks/phantomjs.yml
+    # - include: tasks/phantomjs.yml
 
 
-    - include: 'tasks/jdk.yml'
+    # - include: 'tasks/jdk.yml'
     # require java installed
-    - include: tasks/maven.yml
+    # - include: tasks/maven.yml
     #---- js development
-    - include: 'tasks/node.yml'
-    - include: 'tasks/bower.yml'
-    - include: 'tasks/gulp.yml'
+    # - include: 'tasks/node.yml'
+    # - include: 'tasks/bower.yml'
+    # - include: 'tasks/gulp.yml'
 
+    # require java installed
+    # editors
+    # - include: 'tasks/sublime.yml'
+    # - include: 'tasks/netbeans.yml'
 
-    - include: 'tasks/sublime.yml'
-    - include: 'tasks/netbeans.yml'
-    - include: 'tasks/chrome.yml'
+    # - include: 'tasks/chrome.yml'
   handlers:
     - include: 'handlers/restart_mysql.yml'

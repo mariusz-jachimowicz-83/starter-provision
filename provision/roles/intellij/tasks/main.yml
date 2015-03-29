@@ -1,16 +1,16 @@
 ---
-- name: Install needed dependancies
+- name: IntelliJ | Install needed dependancies
   action: "{{ ansible_pkg_mgr }} state=present name={{ item }}"
   with_items:
     - tar
     - unzip
   tags: ["packages","intellij"]
 
-- name: Download intellij
+- name: IntelliJ | Download
   get_url: url={{intellij_url}} dest={{intellij_tmp}}
   tags: ["packages","intellij"]
 
-- name: Ensure installation directory
+- name: IntelliJ | Ensure installation directory
   file:
     state=directory
     dest={{intellij_install_dir}}
@@ -23,23 +23,23 @@
 #     dest={{intellij_install_dir}}
 #   tags: ["packages","intellij"]
 
-- name: Unarchive intellij 2
+- name: IntelliJ | Unarchive
   command: tar -xvf {{intellij_tmp}} chdir={{intellij_install_dir}}
   tags: ["packages","intellij"]
 
-- name: Retreive intellij dir name
+- name: IntelliJ | Retreive intellij dir name
   command: ls -t {{intellij_install_dir}}
   register: result_intellij_folder_name
   tags: ["configuration","intellij"]
 
-- name: Ensure intellij is configured
+- name: IntelliJ | Ensure intellij is configured
   template: src=idea.properties.j2 dest={{intellij_install_dir}}/{{intellij_folder_name}}/bin/idea.properties
   tags: ["configuration","intellij"]
 
-- name: Ensure intellij bin exist
+- name: IntelliJ | Ensure intellij bin exist
   template: src=intellij.j2 dest=/usr/bin/intellij mode=755
   tags: ["configuration","intellij"]
 
-- name: Ensure intellij shortcut is present
+- name: IntelliJ | Ensure intellij shortcut is present
   template: src=intellij.desktop.j2 dest=/usr/share/applications/intellij.desktop
   tags: ["configuration","intellij"]
