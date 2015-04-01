@@ -71,7 +71,8 @@
     # - include: tasks/phantomjs.yml
 
 
-    # - include: 'tasks/jdk.yml'
+    # - include: 'tasks/jdk7.yml'
+    # - include: 'tasks/jdk8.yml'
     # require java installed
     # - include: tasks/maven.yml
     #---- js development
