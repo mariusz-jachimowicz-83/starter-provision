@@ -5,8 +5,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "clean__ubuntu-12.04.4-desktop-amd64"
-
+  # config.vm.box = "clean__ubuntu-12.04.4-desktop-amd64"
+  config.vm.box = "clean__ubuntu-12"
   
   # Share folders
   #config.vm.synced_folder "/home/cichy/development_for_vagrant", "/home/vagrant/development"
@@ -33,6 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Set to true if you want the virtualbox to start the VM's UI
     vb.gui = true
     vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.customize  ["modifyvm", :id, "--cpus", 4]
     vb.customize ['modifyvm', :id, '--hostonlyadapter2', 'vboxnet0']
   end
 
