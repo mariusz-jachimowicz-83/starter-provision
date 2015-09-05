@@ -1,6 +1,9 @@
 ---
+- name: Add SVN ppa 
+  action: apt_repository repo=ppa:svn/ppa
+
 - name: Install SVN
-  apt: pkg=$item state=latest
+  apt: pkg={{ item }} state=latest
   sudo: yes
   with_items:
     - subversion
