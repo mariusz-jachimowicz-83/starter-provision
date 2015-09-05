@@ -1,6 +1,6 @@
 ---
 - name: rbenv | install build depends
-  apt: pkg=$item state=latest
+  apt: pkg={{item}} state=latest
   with_items:
     #- gcc-c++ 
     #- glibc
