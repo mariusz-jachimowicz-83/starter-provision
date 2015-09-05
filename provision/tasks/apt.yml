@@ -4,15 +4,15 @@
   sudo: yes
 
 - name: Install base packages
-  apt: pkg=$item state=latest
+  apt: pkg={{item}} state=latest
   sudo: yes
   with_items:
-    - git-core
-    - build-essential
-    - fontconfig # needed for phantomjs
-    - curl
-    - python-psycopg2
-    - postgresql
-    - postgresql-client
-    - libpq-dev
-    - postgresql-contrib
+    - "git-core"
+    - "build-essential"
+    - "fontconfig" # needed for phantomjs
+    - "curl"
+    - "python-psycopg2"
+    - "postgresql"
+    - "postgresql-client"
+    - "libpq-dev"
+    - "postgresql-contrib"
