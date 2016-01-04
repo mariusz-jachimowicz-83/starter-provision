@@ -5,7 +5,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "hashicorp/precise64
+  config.vm.box = "hashicorp/precise64"
   # config.vm.box = "clean__ubuntu-12.04.4-desktop-amd64"   # my private only image with gui
   # config.vm.box = "clean__ubuntu-12"                      # my private only image with gui
   
