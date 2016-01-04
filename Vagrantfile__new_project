@@ -41,13 +41,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # in virtualbox vm will have name
-  # definition_name + "-" + host_name + "_" + generated_unique_number
+  # host_name + "-" + definition_name  + "_" + generated_unique_number
   # so it will be
-  # starter-starter_dev_123456789
+  # starter_dev-starter_123456789
   # rename hostname variable to be suitable for your project
   config.vm.define :starter do |starter|
     starter.vm.network :private_network, ip: "192.168.56.200"       # ip for this machine
-    starter.vm.hostname = "starter-dev"  
+    starter.vm.hostname = "starter-project_name"  
   end
 
   # provision machine by ansible
