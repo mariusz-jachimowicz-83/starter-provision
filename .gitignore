@@ -1,0 +1,4 @@
+# syntax: glob
+.Trash-1000
+.vagrant
+Vagrantfile
