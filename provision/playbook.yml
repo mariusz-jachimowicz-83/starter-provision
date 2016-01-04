@@ -48,7 +48,7 @@
     # - { role: postgres}
     # - { role: Stouts.elasticsearch} 
     # - { role: ansible-redis}
-    - { role: scala}
+    # - { role: scala}
     # - { role: sbt}
     # - { role: intellij}
 
@@ -85,5 +85,5 @@
     # - include: 'tasks/netbeans.yml'
 
     # - include: 'tasks/chrome.yml'
-  handlers:
-    - include: 'handlers/restart_mysql.yml'
+  # handlers:
+  #   - include: 'handlers/restart_mysql.yml'
