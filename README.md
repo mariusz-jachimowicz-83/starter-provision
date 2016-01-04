@@ -6,8 +6,10 @@ Project for provisioning all my projects.
 
 It consists all ingredients for my projects, so I can easily lunch development environment for doing stuff in java, ruby, node, or whatever ...
 It's using 
-* vagrant
-* ansible
+
+* Vagrant
+* Ansible
+
 to create development machine.
 
 ### This project development ###
