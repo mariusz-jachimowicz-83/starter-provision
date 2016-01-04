@@ -1,17 +1,27 @@
-Installing ansible
-On Ubuntu 14.04 (version 1.7):
-sudo apt-get install ansible/trusty-backports
-On Ubuntu 12.04 (version 1.6):
-sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:rquillo/ansible
-sudo apt-get update
-sudo apt-get install ansible
-Installing playbook requirements
-ansible-galaxy install Stouts.elasticsearch
-ansible-galaxy install Stouts.supervisor
-ansible-galaxy install debops.nginx
-Running playbook
-Run (with debug):
-ansible-playbook -vvvv tmsearch.yml -i production
-Run (without debug):
-ansible-playbook tmsearch.yml -i production
+# starter-provision #
+
+Project for provisioning all my projects. 
+
+### What is this repository for? ###
+
+It consists all ingredients for my projects, so I can easily lunch development environment for doing stuff in java, ruby, node, or whatever ...
+It's using 
+* vagrant
+* ansible
+to create development machine.
+
+### This project development ###
+
+```
+#!bash
+sh do_init_for_this_project.sh
+vagrant up
+```
+
+### Using in another project ###
+
+```
+#!bash
+cd your_project
+
+```
