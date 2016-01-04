@@ -46,3 +46,10 @@ vagrant halt
 # remove machine from virtualbox machines list
 vagrant destroy
 ```
+
+### How to refresh git submodule ###
+```
+#!bash
+git pull --recurse-submodules
+```
+
