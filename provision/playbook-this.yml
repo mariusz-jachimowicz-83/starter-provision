@@ -1,0 +1,89 @@
+---
+- hosts: starter
+  vars:
+    #---- postgres ---------------
+    ant_version: 1.9.3
+    maven_version: 3.3.1
+    #scala_version: 2.10.3
+    scala_version: 2.11.5
+    sbt_version: "0.13.8"
+    intellij_version: 14.1
+    netbeans_version: 8.0.2
+    locale: en_US.UTF-8
+    postgresql:
+      version: 9.3
+      repo: 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
+      install_development_headers: true
+
+      pg_username: postgres
+      pg_password: postgres
+
+      user: postgres
+      group: postgres
+
+      config:
+        shared_buffers: 24MB
+        work_mem: 1MB
+
+        checkpoint_segments: 3
+        checkpoint_completion_target: 0.5
+
+        effective_cache_size: 128MB
+    #---- ruby ---------------   
+    #ruby: ruby-1.9.2-p180
+    ruby_version: 2.1.3
+    rbenv_makeopts: ""
+    phantomjs: phantomjs-1.9.0-linux-x86_64
+    dev_db: dev
+    test_db: test
+    deploy: vagrant
+    virtualbox_url: http://download.virtualbox.org/virtualbox/4.3.10/virtualbox-4.3_4.3.10-93012~Ubuntu~raring_amd64.deb
+    virtualbox_deb_package: /tmp/virtualbox.deb
+    #--ansible-redis
+    with_redmon: False
+  roles:
+    # check https://github.com/rvm/rvm1-ansible as alternative
+    # - { role: rbenv, sudo: false }
+    # - { role: ruby,  sudo: false }
+    # - { role: postgres}
+    # - { role: Stouts.elasticsearch} 
+    # - { role: ansible-redis}
+    # - { role: scala}
+    # - { role: sbt}
+    # - { role: intellij}
+
+
+  tasks:
+    - name: make sure the system encoding is utf-8
+      sudo: yes
+      template: src=templates/locale dest=/etc/default/locale
+                owner=root group=root mode=644
+
+    - include: tasks/apt.yml
+    # - include: tasks/svn.yml
+    #---- db
+    # - include: tasks/pgadmin3.yml
+    # - include: 'tasks/mysql.yml'
+    # - include: 'tasks/mysql-workbench.yml'
+    # - include: 'tasks/mongo.yml'
+
+    # - include: tasks/phantomjs.yml
+
+
+    # - include: 'tasks/jdk7.yml'
+    # - include: 'tasks/jdk8.yml'
+    # require java installed
+    # - include: tasks/maven.yml
+    #---- js development
+    # - include: 'tasks/node.yml'
+    # - include: 'tasks/bower.yml'
+    # - include: 'tasks/gulp.yml'
+
+    # require java installed
+    # editors
+    # - include: 'tasks/sublime.yml'
+    # - include: 'tasks/netbeans.yml'
+
+    # - include: 'tasks/chrome.yml'
+  # handlers:
+  #   - include: 'handlers/restart_mysql.yml'
