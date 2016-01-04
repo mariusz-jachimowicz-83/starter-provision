@@ -2,3 +2,5 @@
 .Trash-1000
 .vagrant
 Vagrantfile
+provision/inventory-project
+provision/playbook-project.yml
