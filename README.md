@@ -51,5 +51,9 @@ vagrant destroy
 ```
 #!bash
 git pull --recurse-submodules
+or
+git submodule foreach git pull origin master
+or
+git submodule foreach --recursive git pull origin master
 ```
 
