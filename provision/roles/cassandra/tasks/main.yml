@@ -1,0 +1,43 @@
+---
+# based on https://github.com/ANXS/cassandra
+# based on https://github.com/chbatey/vagrant-cassandra-spark
+- name: Make sure the ansible required dependencies are installed
+  apt:
+    pkg: "python-pycurl"
+    state: present
+
+- name: Add the datastax repository apt-key
+  apt_key:
+    url: "http://debian.datastax.com/debian/repo_key"
+    state: present
+
+- name: add debian repository
+  apt_repository: repo='deb http://www.apache.org/dist/cassandra/debian 21x main' state=present
+
+- name: install
+  apt: name=cassandra state=present update_cache=yes force=yes
+
+- name: override cassandra.yaml file
+  template: src=cassandra.yaml dest=/etc/cassandra/
+
+- name: make sure cassandra is started
+  service: name=cassandra state=restarted
+
+# 6. Because the Debian packages start the Cassandra service automatically, you 
+# must stop the server and clear the data:
+
+# Doing this removes the default cluster_name (Test Cluster) from the system table. 
+# All nodes must use the same cluster name.
+
+# $ sudo service cassandra stop
+# $ sudo rm -rf /var/lib/cassandra/data/system/*
+
+# The distribution of Cassandra is ready for configuration.
+
+# sudo chmod 777 /var/lib/cassandra
+# sudo chmod 777 /var/lib/cassandra/*
+# sudo chmod 777 /var/log/cassandra
+# sudo chmod 777 /var/log/cassandra/*
+
+# sudo cassandra
+# cqlsh

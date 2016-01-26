@@ -46,6 +46,7 @@
     # - { role: rbenv, sudo: false }
     # - { role: ruby,  sudo: false }
     # - { role: postgres}
+    # - { role: cassandra}
     # - { role: Stouts.elasticsearch} 
     # - { role: ansible-redis}
     # - { role: scala}
