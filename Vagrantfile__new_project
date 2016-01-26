@@ -47,13 +47,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # rename hostname variable to be suitable for your project
   config.vm.define :starter do |starter|
     starter.vm.network :private_network, ip: "192.168.56.200"       # ip for this machine
-    starter.vm.hostname = "starter-project_name"  
+    starter.vm.hostname = "starter-project-name"  
   end
 
   # provision machine by ansible
   config.vm.provision :ansible do |ansible|
-    ansible.playbook       = "provision/playbook-project.yml" # playbook path
-    ansible.inventory_path = "provision/inventory-project"    # inventory path
+    ansible.playbook       = "provisioning/provision/playbook-project.yml" # playbook path
+    ansible.inventory_path = "provisioning/provision/inventory-project"    # inventory path
     ansible.sudo           = true                             # as sudo ?
   end
 
