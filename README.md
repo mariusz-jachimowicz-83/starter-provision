@@ -34,6 +34,7 @@ uncomment ingredients in provisioning/provision/playbook-project.yml suitable fo
 vagrant up
 
 ```
+
 ### Vagrant operations ###
 ```
 #!bash
@@ -47,7 +48,16 @@ vagrant halt
 vagrant destroy
 ```
 
-### How to refresh git submodule ###
+### Clone project with submodules ###
+
+```
+#!bash
+git clone you_project_git
+git submodule update --init --recursive
+
+```
+
+### How to refresh git submodules ###
 ```
 #!bash
 git pull --recurse-submodules
