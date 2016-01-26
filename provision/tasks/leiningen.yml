@@ -1,0 +1,24 @@
+---
+- name: Install | Ensure that lein directory exists
+  file: path=/usr/local/bin/lein-stable state=directory
+  sudo: yes
+
+- name: Leiningen | Download 
+  get_url:  url=https://raw.github.com/technomancy/leiningen/stable/bin/lein validate_certs=no
+            dest=/usr/local/bin/lein-stable
+            mode=0755
+  sudo: yes
+
+- name: Leiningen | Link to main version
+  file: dest=/usr/local/bin/lein
+        src=/usr/local/bin/lein-stable/lein
+        state=link
+  sudo: yes
+
+# after run 
+# lein
+# it will create 
+# [home_dir]/.lein/self-installs/leiningen-2.5.3-standalone.jar  
+# it also creates 
+# [home_dir]/.m2/repository
+# for maven artifacts
