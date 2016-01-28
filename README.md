@@ -20,7 +20,7 @@ sh do_init_for_this_project.sh
 vagrant up
 ```
 
-### Use in another project ###
+### Add to another project ###
 
 ```
 #!bash
@@ -34,6 +34,7 @@ uncomment ingredients in provisioning/provision/playbook-project.yml suitable fo
 vagrant up
 
 ```
+
 ### Vagrant operations ###
 ```
 #!bash
@@ -47,7 +48,16 @@ vagrant halt
 vagrant destroy
 ```
 
-### How to refresh git submodule ###
+### Clone project with submodules ###
+
+```
+#!bash
+git clone you_project_git
+git submodule update --init --recursive
+
+```
+
+### How to refresh git submodules ###
 ```
 #!bash
 git pull --recurse-submodules
@@ -56,4 +66,3 @@ git submodule foreach git pull origin master
 or
 git submodule foreach --recursive git pull origin master
 ```
-
