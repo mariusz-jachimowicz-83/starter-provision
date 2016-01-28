@@ -75,9 +75,11 @@
     # - include: 'tasks/jdk8.yml'
     # require java installed
     # - include: tasks/maven.yml
-    - include: tasks/leiningen.yml
+    # - include: tasks/leiningen.yml
     #---- js development
     # - include: 'tasks/node.yml'
+    # - include: 'tasks/node_4x.yml'
+    # - include: 'tasks/node_5x.yml'
     # - include: 'tasks/bower.yml'
     # - include: 'tasks/gulp.yml'
 
