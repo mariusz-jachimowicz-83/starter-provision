@@ -1,3 +1,10 @@
 ---
 - name: Install Gulp
   shell: npm install -g gulp
+
+- name: Install coffee-script compiler
+  shell: npm install -g coffee-script
+
+- name: Install open module
+  shell: sudo npm install -g open
+
