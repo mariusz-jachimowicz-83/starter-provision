@@ -55,6 +55,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook       = "provision/playbook-this.yml"   # playbook path
     ansible.inventory_path = "provision/inventory-this"      # inventory path
     ansible.sudo           = true                            # as sudo ?
+    # ansible.verbose = 'vvvv'
   end
 
 end
