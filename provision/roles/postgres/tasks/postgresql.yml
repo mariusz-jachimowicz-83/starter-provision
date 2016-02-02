@@ -89,4 +89,10 @@
   sudo_user: postgres
   when: "'adminpack' not in server_instrumentation.stdout"
 
+# in case of errors see
+# http://nixmash.com/postgresql/upgrading-postgresql-9-1-to-9-3-in-ubuntu
+
+# see on terminal
+# sudo pg_lsclusters
+
 
