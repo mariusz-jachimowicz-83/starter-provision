@@ -11,7 +11,7 @@
     netbeans_version: 8.0.2
     locale: en_US.UTF-8
     postgresql:
-      version: 9.3
+      version: 9.5
       repo: 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
       install_development_headers: true
 
@@ -45,7 +45,7 @@
     # check https://github.com/rvm/rvm1-ansible as alternative
     # - { role: rbenv, sudo: false }
     # - { role: ruby,  sudo: false }
-    # - { role: postgres}
+    - { role: postgres}
     # - { role: cassandra}
     # - { role: Stouts.elasticsearch} 
     # - { role: ansible-redis}

@@ -11,7 +11,7 @@
     netbeans_version: 8.0.2
     locale: en_US.UTF-8
     postgresql:
-      version: 9.3
+      version: 9.5
       repo: 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
       install_development_headers: true
 
@@ -57,7 +57,7 @@
   tasks:
     - name: make sure the system encoding is utf-8
       sudo: yes
-      template: src=templates/locale dest=/etc/default/locale
+      template: src=provisioning/provision/templates/locale dest=/etc/default/locale
                 owner=root group=root mode=644
 
     - include: 'provisioning/provision/tasks/apt.yml'
