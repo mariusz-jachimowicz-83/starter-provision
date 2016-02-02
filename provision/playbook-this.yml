@@ -45,7 +45,7 @@
     # check https://github.com/rvm/rvm1-ansible as alternative
     # - { role: rbenv, sudo: false }
     # - { role: ruby,  sudo: false }
-    - { role: postgres}
+    # - { role: postgres}
     # - { role: cassandra}
     # - { role: Stouts.elasticsearch} 
     # - { role: ansible-redis}
