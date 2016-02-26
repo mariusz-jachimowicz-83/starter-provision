@@ -46,7 +46,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # starter_dev-starter_123456789
   # rename hostname variable to be suitable for your project
   config.vm.define :starter do |starter|
-    starter.vm.network :private_network, ip: "192.168.56.200"       # ip for this machine
+    starter.vm.network :private_network, ip: "192.168.56.202"       # ip for this machine
     starter.vm.hostname = "starter-dev"  
   end
 
