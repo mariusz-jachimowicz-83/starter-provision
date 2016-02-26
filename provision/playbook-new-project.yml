@@ -82,6 +82,7 @@
     # - include: 'provisioning/provision/tasks/node_5x.yml'
     # - include: 'provisioning/provision/tasks/bower.yml'
     # - include: 'provisioning/provision/tasks/gulp.yml'
+    # - include: 'provisioning/provision/tasks/npm_upgrade.yml'
 
     # require java installed
     # editors

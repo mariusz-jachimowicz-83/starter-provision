@@ -82,6 +82,7 @@
     # - include: 'tasks/node_5x.yml'
     # - include: 'tasks/bower.yml'
     # - include: 'tasks/gulp.yml'
+    # - include: 'tasks/npm_upgrade.yml'
 
     # require java installed
     # editors
