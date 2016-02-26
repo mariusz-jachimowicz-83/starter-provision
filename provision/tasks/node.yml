@@ -17,10 +17,10 @@
   with_items:
     - nodejs
 
-#- name: Node.js | Install npm
-#  action: apt pkg={{ item }} state=installed
-#  tags: nodejs
-#  with_items:
+# - name: Node.js | Install npm
+#   action: apt pkg={{ item }} state=installed
+#   tags: nodejs
+#   with_items:
 #    - npm
 
 - name: show node.js version
