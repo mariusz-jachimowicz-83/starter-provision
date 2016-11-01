@@ -1,21 +1,21 @@
 ---
 # nice example http://cn.soulmachine.me/blog/20140129/
-- name: Maven | Download v 3.3.1 into /opt/maven3.tar.gz
+- name: Maven | Download v 3.3.9 into /opt/maven3.tar.gz
   sudo: yes
-  get_url: dest=/opt/maven3.tar.gz url=http://ftp.ps.pl/pub/apache/maven/maven-3/3.3.1/binaries/apache-maven-3.3.1-bin.tar.gz
+  get_url: dest=/opt/maven3.tar.gz url=http://ftp.ps.pl/pub/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
 
 - name: Maven | Upack from /opt/maven3.tar.gz
   sudo: yes
-  action: command creates=/opt/apache-maven-3.3.1 chdir=/opt tar zxvf /opt/maven3.tar.gz
+  action: command creates=/opt/apache-maven-3.3.9 chdir=/opt tar zxvf /opt/maven3.tar.gz
 
 - name: Maven | unpacked maven exists?
   sudo: yes
-  stat: path=/opt/apache-maven-3.3.1
+  stat: path=/opt/apache-maven-3.3.9
   register: maven_unpacked_exists
 
 - name: Maven | Rename to /opt/maven
   sudo: yes
-  command: creates="/opt/maven" mv /opt/apache-maven-3.3.1 /opt/maven
+  command: creates="/opt/maven" mv /opt/apache-maven-3.3.9 /opt/maven
   when: maven_unpacked_exists.stat.exists
 
 # - name: Maven | Move to /usr/local/maven
@@ -29,7 +29,7 @@
 #   lineinfile: dest=~{{deploy}}/.bash_profile regexp='^#?\s*export PATH=(.*)M2(.*)$' line="export PATH=\$M2:\$PATH" state=present
 #   lineinfile: dest=~{{deploy}}/.bash_profile regexp='^#?\s*export MAVEN_OPTS=(.*)$' line="export MAVEN_OPTS='-Xms256m -Xmx512m'" state=present
 
-# - name: Maven | exists /usr/local/share/maven? 
+# - name: Maven | exists /usr/local/share/maven?
 #   stat: path=/opt/maven
 #   register: maven_local_exists
 
