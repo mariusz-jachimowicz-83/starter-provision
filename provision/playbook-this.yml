@@ -43,6 +43,7 @@
     with_redmon: False
   roles:
     - { role: apt, sudo: true }
+    - { role: git, sudo: true }
     # check https://github.com/rvm/rvm1-ansible as alternative
     # - { role: rbenv, sudo: false }
     # - { role: ruby,  sudo: false }

@@ -43,6 +43,7 @@
     with_redmon: False
   roles:
     - { role: 'provisioning/provision/roles/apt', sudo: true }
+    - { role: 'provisioning/provision/roles/git', sudo: true }
     # check https://github.com/rvm/rvm1-ansible as alternative
     # - { role: 'provisioning/provision/roles/rbenv', sudo: false }
     # - { role: 'provisioning/provision/roles/ruby',  sudo: false }
@@ -61,7 +62,6 @@
       template: src=provisioning/provision/templates/locale dest=/etc/default/locale
                 owner=root group=root mode=644
 
-    - include: 'provisioning/provision/tasks/apt.yml'
     # - include: 'provisioning/provision/tasks/svn.yml'
     #---- db
     # - include: 'provisioning/provision/tasks/pgadmin3.yml'
