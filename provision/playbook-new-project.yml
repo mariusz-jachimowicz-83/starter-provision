@@ -29,7 +29,7 @@
         checkpoint_completion_target: 0.5
 
         effective_cache_size: 128MB
-    #---- ruby ---------------   
+    #---- ruby ---------------
     #ruby: ruby-1.9.2-p180
     ruby_version: 2.1.3
     rbenv_makeopts: ""
@@ -42,12 +42,13 @@
     #--ansible-redis
     with_redmon: False
   roles:
+    - { role: 'provisioning/provision/roles/apt', sudo: true }
     # check https://github.com/rvm/rvm1-ansible as alternative
     # - { role: 'provisioning/provision/roles/rbenv', sudo: false }
     # - { role: 'provisioning/provision/roles/ruby',  sudo: false }
     # - { role: 'provisioning/provision/roles/postgres'}
     # - { role: 'provisioning/provision/roles/cassandra}
-    # - { role: 'provisioning/provision/roles/Stouts.elasticsearch'} 
+    # - { role: 'provisioning/provision/roles/Stouts.elasticsearch'}
     # - { role: 'provisioning/provision/roles/ansible-redis'}
     # - { role: 'provisioning/provision/roles/scala'}
     # - { role: 'provisioning/provision/roles/sbt'}
