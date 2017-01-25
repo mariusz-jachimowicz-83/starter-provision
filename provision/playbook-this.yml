@@ -47,14 +47,31 @@
     # check https://github.com/rvm/rvm1-ansible as alternative
     # - { role: rbenv, sudo: false }
     # - { role: ruby,  sudo: false }
-    # - { role: postgres}
-    # - { role: cassandra}
-    # - { role: Stouts.elasticsearch}
-    # - { role: ansible-redis}
-    # - { role: scala}
-    # - { role: sbt}
-    # - { role: intellij}
 
+    # - { role: jdk8 }
+    # - { role: jdk7 }
+    # - { role: maven }
+    # - { role: leiningen }
+
+    # --------- DB ----------------------------------------
+    # - { role: postgres }
+    # - { role: pgadmin3 }
+    # - { role: mongo }
+    # - { role: mysql }
+    # - { role: mysql-workbench }
+    # - { role: cassandra }
+
+    # - { role: Stouts.elasticsearch }
+    # - { role: ansible-redis }
+    # - { role: scala }
+    # - { role: sbt }
+
+    # --------- editors ----------------------------------------
+    # - { role: sublime }
+    # - { role: intellij }
+    # - { role: netbeans }
+
+    # - { role: phantomjs }
 
   tasks:
     - name: make sure the system encoding is utf-8
@@ -63,20 +80,7 @@
                 owner=root group=root mode=644
 
     # - include: tasks/svn.yml
-    #---- db
-    # - include: tasks/pgadmin3.yml
-    # - include: 'tasks/mysql.yml'
-    # - include: 'tasks/mysql-workbench.yml'
-    # - include: 'tasks/mongo.yml'
 
-    # - include: tasks/phantomjs.yml
-
-
-    # - include: 'tasks/jdk7.yml'
-    # - include: 'tasks/jdk8.yml'
-    # require java installed
-    # - include: tasks/maven.yml
-    # - include: tasks/leiningen.yml
     #---- js development
     # - include: 'tasks/node.yml'
     # - include: 'tasks/node_4x.yml'
@@ -84,11 +88,6 @@
     # - include: 'tasks/bower.yml'
     # - include: 'tasks/gulp.yml'
     # - include: 'tasks/npm_upgrade.yml'
-
-    # require java installed
-    # editors
-    # - include: 'tasks/sublime.yml'
-    # - include: 'tasks/netbeans.yml'
 
     # - include: 'tasks/chrome.yml'
   # handlers:

@@ -47,14 +47,31 @@
     # check https://github.com/rvm/rvm1-ansible as alternative
     # - { role: 'provisioning/provision/roles/rbenv', sudo: false }
     # - { role: 'provisioning/provision/roles/ruby',  sudo: false }
-    # - { role: 'provisioning/provision/roles/postgres'}
-    # - { role: 'provisioning/provision/roles/cassandra}
-    # - { role: 'provisioning/provision/roles/Stouts.elasticsearch'}
-    # - { role: 'provisioning/provision/roles/ansible-redis'}
-    # - { role: 'provisioning/provision/roles/scala'}
-    # - { role: 'provisioning/provision/roles/sbt'}
-    # - { role: 'provisioning/provision/roles/intellij'}
 
+    # - { role: 'provisioning/provision/roles/jdk8' }
+    # - { role: 'provisioning/provision/roles/jdk7' }
+    # - { role: 'provisioning/provision/roles/maven' }
+    # - { role: 'provisioning/provision/roles/leiningen' }
+
+    # --------- DB ----------------------------------------
+    # - { role: 'provisioning/provision/roles/postgres' }
+    # - { role: 'provisioning/provision/roles/pgadmin3' }
+    # - { role: 'provisioning/provision/roles/mongo' }
+    # - { role: 'provisioning/provision/roles/mysql' }
+    # - { role: 'provisioning/provision/roles/mysql-workbench' }
+    # - { role: 'provisioning/provision/roles/cassandra' }
+
+    # - { role: 'provisioning/provision/roles/Stouts.elasticsearch' }
+    # - { role: 'provisioning/provision/roles/ansible-redis' }
+    # - { role: 'provisioning/provision/roles/scala' }
+    # - { role: 'provisioning/provision/roles/sbt' }
+
+    # --------- editors ----------------------------------------
+    # - { role: 'provisioning/provision/roles/sublime' }
+    # - { role: 'provisioning/provision/roles/intellij' }
+    # - { role: 'provisioning/provision/roles/netbeans' }
+
+    # - { role: 'provisioning/provision/roles/phantomjs' }
 
   tasks:
     - name: make sure the system encoding is utf-8
@@ -63,20 +80,7 @@
                 owner=root group=root mode=644
 
     # - include: 'provisioning/provision/tasks/svn.yml'
-    #---- db
-    # - include: 'provisioning/provision/tasks/pgadmin3.yml'
-    # - include: 'provisioning/provision/tasks/mysql.yml'
-    # - include: 'provisioning/provision/tasks/mysql-workbench.yml'
-    # - include: 'provisioning/provision/tasks/mongo.yml'
 
-    # - include: 'provisioning/provision/tasks/phantomjs.yml'
-
-
-    # - include: 'provisioning/provision/tasks/jdk7.yml'
-    # - include: 'provisioning/provision/tasks/jdk8.yml'
-    # require java installed
-    # - include: 'provisioning/provision/tasks/maven.yml'
-    # - include: 'provisioning/provision/tasks/leiningen.yml'
     #---- js development
     # - include: 'provisioning/provision/tasks/node.yml'
     # - include: 'provisioning/provision/tasks/node_4x.yml'
@@ -84,11 +88,6 @@
     # - include: 'provisioning/provision/tasks/bower.yml'
     # - include: 'provisioning/provision/tasks/gulp.yml'
     # - include: 'provisioning/provision/tasks/npm_upgrade.yml'
-
-    # require java installed
-    # editors
-    # - include: 'provisioning/provision/tasks/sublime.yml'
-    # - include: 'provisioning/provision/tasks/netbeans.yml'
 
     # - include: 'provisioning/provision/tasks/chrome.yml'
   # handlers:
