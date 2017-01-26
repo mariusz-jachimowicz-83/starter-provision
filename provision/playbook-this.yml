@@ -45,13 +45,26 @@
     - { role: apt, sudo: true }
     - { role: git, sudo: true }
     # check https://github.com/rvm/rvm1-ansible as alternative
+
+    # --------- ruby ----------------------------------------
     # - { role: rbenv, sudo: false }
     # - { role: ruby,  sudo: false }
 
+    # --------- java ----------------------------------------
     # - { role: jdk8 }
     # - { role: jdk7 }
     # - { role: maven }
+
+    # --------- clojure ----------------------------------------
     # - { role: leiningen }
+
+    # --------- node.js ----------------------------------------
+    # - { role: node }
+    # - { role: node-4x }
+    # - { role: node-5x }
+    # - { role: bower }
+    # - { role: gulp }
+    # - { role: npm_upgrade }
 
     # --------- DB ----------------------------------------
     # - { role: postgres }
@@ -71,6 +84,8 @@
     # - { role: intellij }
     # - { role: netbeans }
 
+    # - { role: chrome }
+
     # - { role: phantomjs }
 
   tasks:
@@ -81,14 +96,5 @@
 
     # - include: tasks/svn.yml
 
-    #---- js development
-    # - include: 'tasks/node.yml'
-    # - include: 'tasks/node_4x.yml'
-    # - include: 'tasks/node_5x.yml'
-    # - include: 'tasks/bower.yml'
-    # - include: 'tasks/gulp.yml'
-    # - include: 'tasks/npm_upgrade.yml'
-
-    # - include: 'tasks/chrome.yml'
   # handlers:
   #   - include: 'handlers/restart_mysql.yml'
