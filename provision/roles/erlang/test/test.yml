@@ -1,0 +1,7 @@
+- hosts: test
+  remote_user: root
+  roles:
+  - role: erlang
+    erlang_extra_packages:
+      - erlang-dev
+      - elixir

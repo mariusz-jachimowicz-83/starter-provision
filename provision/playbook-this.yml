@@ -66,6 +66,10 @@
     # - { role: gulp }
     # - { role: npm_upgrade }
 
+    # --------- erlang ----------------------------------------
+    # - { role: erlang }
+    # - { role: elixir }
+
     # --------- DB ----------------------------------------
     # - { role: postgres }
     # - { role: pgadmin3 }

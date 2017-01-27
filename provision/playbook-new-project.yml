@@ -66,6 +66,10 @@
     # - { role: 'provisioning/provision/roles/gulp' }
     # - { role: 'provisioning/provision/roles/npm_upgrade' }
 
+    # --------- erlang ----------------------------------------
+    # - { role: 'provisioning/provision/roles/erlang' }
+    # - { role: 'provisioning/provision/roles/elixir' }
+
     # --------- DB ----------------------------------------
     # - { role: 'provisioning/provision/roles/postgres' }
     # - { role: 'provisioning/provision/roles/pgadmin3' }

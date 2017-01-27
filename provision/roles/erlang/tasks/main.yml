@@ -1,0 +1,17 @@
+---
+
+- name: Check installation
+  command: dpkg-query -s erlang
+  register: erlang_installed
+  ignore_errors: true
+  changed_when: false
+
+- name: Install Erlang
+  include: install_erlang.yml
+  when: erlang_installed | failed
+
+- name: Install erlang extra packages
+  apt: name={{ item }} state=present
+  with_items:
+    - erlang-manpages
+    - erlang-dev
