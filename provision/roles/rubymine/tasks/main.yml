@@ -1,0 +1,45 @@
+---
+- name: Test if installation folder exist
+  stat:
+    path={{rubymine_install_dir}}/RubyMine-{{rubymine_version}}
+  register: rubymine_exist
+  tags: ["rubymine"]
+
+- name: Install needed dependancies
+  action: "{{ ansible_pkg_mgr }} state=present name={{ item }}"
+  when: rubymine_exist.stat.exists == False
+  with_items:
+    - tar
+    - unzip
+  tags: ["packages","rubymine"]
+
+- name: Ensure installation directory
+  file:
+    state=directory
+    dest={{rubymine_install_dir}}/rubymine
+  tags: ["packages","intellij"]
+
+- name: Download
+  when: rubymine_exist.stat.exists == False
+  get_url:
+    url=http://download.jetbrains.com/ruby/RubyMine-{{rubymine_version}}.tar.gz
+    dest={{rubymine_tmp}}
+  tags: ["packages","rubymine"]
+
+- name: Unarchive
+  when: rubymine_exist.stat.exists == False
+  command: tar -xvf {{rubymine_tmp}} chdir={{rubymine_install_dir}}
+  tags: ["packages","rubymine"]
+
+# - name: Retreive rubymine dir name
+#   when: rubymine_exist.stat.exists == False
+#   command: ls -t {{rubymine_install_dir}}
+#   register: result_rubymine_folder_name
+#   tags: ["configuration","rubymine"]
+
+- name: Create symlink
+  file:
+    src={{rubymine_install_dir}}/RubyMine-{{rubymine_version}}/bin/rubymine.sh
+    dest=/usr/bin/rubymine
+    state=link
+  tags: ["packages","rubymine"]

@@ -1,0 +1,6 @@
+---
+# Package states: installed or latest
+rubymine_version: 2016.3.1
+rubymine_pkg_state: installed
+rubymine_tmp: /home/vagrant/rubymine.tar.gz
+rubymine_install_dir: /opt

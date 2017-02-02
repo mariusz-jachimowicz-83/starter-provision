@@ -7,7 +7,7 @@
     #scala_version: 2.10.3
     scala_version: 2.11.5
     sbt_version: "0.13.8"
-    intellij_version: 14.1
+    intellij_version: 2016.3.4-no-jdk
     netbeans_version: 8.0.2
     locale: en_US.UTF-8
     postgresql:
@@ -31,7 +31,7 @@
         effective_cache_size: 128MB
     #---- ruby ---------------
     #ruby: ruby-1.9.2-p180
-    ruby_version: 2.1.3
+    ruby_version: 2.4.0
     rbenv_makeopts: ""
     phantomjs: phantomjs-1.9.0-linux-x86_64
     dev_db: dev
@@ -47,8 +47,8 @@
     # check https://github.com/rvm/rvm1-ansible as alternative
 
     # --------- ruby ----------------------------------------
-    # - { role: rbenv, sudo: false }
-    # - { role: ruby,  sudo: false }
+    - { role: rbenv, sudo: false }
+    - { role: ruby,  sudo: false }
 
     # --------- java ----------------------------------------
     # - { role: jdk8 }
@@ -86,6 +86,7 @@
     # --------- editors ----------------------------------------
     # - { role: sublime }
     # - { role: intellij }
+    # - { role: rubymine }
     # - { role: netbeans }
 
     # - { role: chrome }

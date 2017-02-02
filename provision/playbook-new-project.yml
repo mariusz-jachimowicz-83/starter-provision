@@ -86,6 +86,7 @@
     # --------- editors ----------------------------------------
     # - { role: 'provisioning/provision/roles/sublime' }
     # - { role: 'provisioning/provision/roles/intellij' }
+    # - { role: 'provisioning/provision/roles/rubymine' }
     # - { role: 'provisioning/provision/roles/netbeans' }
 
     # - { role: 'provisioning/provision/roles/chrome' }
