@@ -87,6 +87,7 @@
     # - { role: sublime }
     # - { role: intellij }
     # - { role: rubymine }
+    # - { role: neovim }
     # - { role: netbeans }
 
     # - { role: chrome }
