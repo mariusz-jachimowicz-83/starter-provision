@@ -1,8 +1,42 @@
----
-# Install Redis
-- include: redis_deb.yml tags=redis
-  when: ansible_distribution in [ 'Debian', 'Ubuntu' ]
+- name: add repository
+  sudo: true
+  apt_repository: repo=ppa:chris-lea/redis-server
 
-# Install Redmon dashboard
-- include: redmon.yml tags=redis
-  when: with_redmon
+- name: install
+  sudo: true
+  apt: pkg=redis-server
+  register: result
+
+- name: disable default service
+  sudo: true
+  service: name=redis-server enabled=no state=stopped
+  when: result.changed
+
+- name: create data dir
+  sudo: true
+  file: >
+    path={{ redis.options.dir }}
+    state=directory
+    owner=redis
+    group=redis
+
+- name: generate upstart script
+  sudo: true
+  template: >
+    src=upstart.conf.j2
+    dest=/etc/init/{{ redis.service }}.conf
+  notify: restart {{ redis.service }}
+
+- name: generate config file
+  sudo: true
+  template: >
+    src=redis.conf.j2
+    owner=redis
+    group=redis
+    dest={{ redis.configPath }}
+  notify: restart {{ redis.service }}
+
+- name: remove default redis config
+  sudo: true
+  file: path=/etc/redis/redis.conf state=absent
+  when: redis.configPath != '/etc/redis/redis.conf'

@@ -1,8 +1,5 @@
----
-- name: "Restart Redis"
-  sudo: yes
-  service: name={{ redis.deb.service }} state=restarted
-
-- name: "Restart Redmon"
-  sudo: yes
-  service: name={{ redmon.service }} state=restarted
+- name: restart {{ redis.service }}
+  sudo: true
+  service: >
+    name={{ redis.service }}
+    state=restarted
