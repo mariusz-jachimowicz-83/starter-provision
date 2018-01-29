@@ -7,6 +7,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "igorbrites/ubuntu-trusty64-gui"
   config.vm.box_version = "0"
+  # or
+  # config.vm.box = "ForgottenBeast/ubuntu_16.04_gui"
+  # config.vm.box_version = "1.0.0"
   # config.vm.box = "clean__ubuntu-12.04.4-desktop-amd64"   # my private only image with gui
   # config.vm.box = "clean__ubuntu-12"                      # my private only image with gui
 
