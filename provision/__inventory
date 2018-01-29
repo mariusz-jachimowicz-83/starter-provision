@@ -1,0 +1,1 @@
+@vm_name@ ansible_ssh_host=@vm_ip@ ansible_ssh_port=22

@@ -5,31 +5,25 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "hashicorp/precise64"
+  config.vm.box = "igorbrites/ubuntu-trusty64-gui"
+  config.vm.box_version = "0"
   # config.vm.box = "clean__ubuntu-12.04.4-desktop-amd64"   # my private only image with gui
   # config.vm.box = "clean__ubuntu-12"                      # my private only image with gui
-  
-  # Share folders
-  #config.vm.synced_folder "/home/cichy/development_for_vagrant", "/home/vagrant/development"
-
-  
-  # Set the hostname
-  #config.vm.hostname = "proj-dev"
 
   # Enable X11 forwarding
   config.ssh.forward_x11 = true
 
   # example
-  #config.vm.network "forwarded_port", guest: 3000, host: 3000
-  #config.vm.network "forwarded_port", guest: 9200, host: 9200
-  #config.vm.network "forwarded_port", guest: 5432, host: 5432
-  #config.vm.network :forwarded_port, guest: 8080, host: 4880
-  #config.vm.network :forwarded_port, guest: 8000, host: 4800
-  #config.vm.network :forwarded_port, guest: 1099, host: 1099
+  # config.vm.network "forwarded_port", guest: 3000, host: 3000
+  # config.vm.network "forwarded_port", guest: 9200, host: 9200
+  # config.vm.network "forwarded_port", guest: 5432, host: 5432
+  # config.vm.network :forwarded_port, guest: 8080, host: 4880
+  # config.vm.network :forwarded_port, guest: 8000, host: 4800
+  # config.vm.network :forwarded_port, guest: 1099, host: 1099
 
   # example
-  #config.vm.network :hostonly, "192.168.56.200", :netmask => "255.255.255.0"
-  #config.vm.network :private_network, ip: "192.168.56.200"
+  # config.vm.network :hostonly, "192.168.56.200", :netmask => "255.255.255.0"
+  # config.vm.network :private_network, ip: "192.168.56.200"
 
   # VirtualBox provider configuration.
   config.vm.provider :virtualbox do |vb|
@@ -45,17 +39,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # so it will be
   # starter_dev-starter_123456789
   # rename hostname variable to be suitable for your project
-  config.vm.define :starter do |starter|
-    starter.vm.network :private_network, ip: "192.168.56.202"       # ip for this machine
-    starter.vm.hostname = "starter-dev"  
+  config.vm.define :@vm_name@ do |starter|
+    starter.vm.network :private_network, ip: "@vm_ip@"       # ip for this machine
+    starter.vm.hostname = "@vm_name@-dev"
   end
 
   # provision machine by ansible
   config.vm.provision :ansible do |ansible|
-    ansible.playbook       = "provision/playbook-this.yml"   # playbook path
-    ansible.inventory_path = "provision/inventory-this"      # inventory path
-    ansible.sudo           = true                            # as sudo ?
-    # ansible.verbose = 'vvvv'
+    ansible.playbook       = "playbook.yml"   # playbook path
+    ansible.inventory_path = "inventory"      # inventory path
+    ansible.sudo           = true             # as sudo ?
+    # ansible.verbose      = 'vvvv'
   end
 
 end

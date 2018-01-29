@@ -4,9 +4,10 @@ Project for provisioning all my projects.
 
 ### What is this repository for? ###
 
-It consists all ingredients for my projects, so I can easily lunch development environment for doing stuff in java, ruby, node, or whatever ...
+It contains all ingredients for my projects, so I can easily launch development environment for doing stuff in java, ruby, node, or whatever ...
 It's using 
 
+* VirtualBox
 * Vagrant
 * Ansible
 
@@ -27,9 +28,10 @@ vagrant up
 cd your_project
 git submodule add git@bitbucket.org:mj83/starter-provision.git provisioning
 cd provisioning
+edit variables VM_IP and VM_NAME in do_init_for_new_project.sh
 sh do_init_for_new_project.sh
 cd ..
-edit starter.vm.hostname in Vagrantfile
+
 uncomment ingredients in provisioning/provision/playbook-project.yml suitable for your project
 vagrant up
 
