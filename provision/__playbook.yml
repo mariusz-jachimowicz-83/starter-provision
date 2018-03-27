@@ -62,6 +62,7 @@
     # - { role: '@ansible_roles_path@node' }
     # - { role: '@ansible_roles_path@node-4x' }
     # - { role: '@ansible_roles_path@node-5x' }
+    # - { role: '@ansible_roles_path@node-7x' }
     # - { role: '@ansible_roles_path@bower' }
     # - { role: '@ansible_roles_path@gulp' }
     # - { role: '@ansible_roles_path@npm_upgrade' }
