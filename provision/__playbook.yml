@@ -72,6 +72,9 @@
     # - { role: '@ansible_roles_path@erlang' }
     # - { role: '@ansible_roles_path@elixir' }
 
+    # --------- go ----------------------------------------
+    # - { role: '@ansible_roles_path@go' }
+
     # --------- DB ----------------------------------------
     # - { role: '@ansible_roles_path@postgres' }
     # - { role: '@ansible_roles_path@pgadmin3' }
