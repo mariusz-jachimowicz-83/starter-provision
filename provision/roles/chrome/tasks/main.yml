@@ -1,8 +1,11 @@
 ---
-- name: browser | Install Chromium Browser
-  sudo: yes
-  apt: pkg=chromium-browser state=present
-  
-#- name: browser | Install Chromium Browser
-#  sudo: yes
-#  apt: pkg=pepperflashplugin-nonfree state=present
+# tasks file for ansible-role-chrome
+
+
+- include: setup-apt.yml
+  when: ansible_pkg_mgr == 'apt'
+
+- include: setup-dnf.yml
+  when: ansible_pkg_mgr == 'dnf'
+
+...
