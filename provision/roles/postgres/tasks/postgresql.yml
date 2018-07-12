@@ -9,15 +9,15 @@
 - name: set locale to {{locale}}
   command: /usr/sbin/update-locale LANG={{locale}} LC_ALL={{locale}} LANGUAGE={{locale}}
   when: "'LC_ALL={{locale}}' not in locale_output.stdout"
-  sudo: yes
+  become: true
 
 - name: update apt cache (if out of date)
   #Updates it only every 4 hours
   apt: update_cache=yes cache_valid_time={{ 60*60*4 }}
-  sudo: true
+  become: true
 
 - name: install prerequisites
-  sudo: true
+  become: true
   #This installs/upgrades every item
   apt: name={{ item }} state=latest
   with_items:
@@ -75,18 +75,18 @@
 
 - name: create the default postgresql user
   postgresql_user: name={{postgresql.pg_username}} password={{postgresql.pg_password}} login_user=postgres role_attr_flags=CREATEDB,SUPERUSER
-  sudo_user: postgres
+  become_user: postgres
   tags: postgresql
 
 - name: test for server instrumentation
   command: psql -c 'select * from pg_extension;' -t -A
-  sudo_user: postgres
+  become_user: postgres
   register: server_instrumentation
   changed_when: False
 
 - name: install server instrumentation
   command: psql -c 'CREATE EXTENSION adminpack;' -t -A
-  sudo_user: postgres
+  become_user: postgres
   when: "'adminpack' not in server_instrumentation.stdout"
 
 # in case of errors see
