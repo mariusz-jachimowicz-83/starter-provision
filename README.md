@@ -26,7 +26,7 @@ vagrant up
 ```
 #!bash
 cd your_project
-git submodule add git@bitbucket.org:mj83/starter-provision.git provisioning
+git submodule add git@github.com:mariusz-jachimowicz-83/starter-provision.git provisioning
 cd provisioning
 edit variables VM_IP and VM_NAME in do_init_for_new_project.sh
 sh do_init_for_new_project.sh
