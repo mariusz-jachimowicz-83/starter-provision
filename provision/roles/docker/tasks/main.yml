@@ -1,0 +1,62 @@
+- name: Add docker install dependencies
+  become: true
+  apt:
+    pkg: "{{item}}"
+    state: present
+  with_items:
+    - make
+    - apt-transport-https
+    - ca-certificates
+    - software-properties-common
+
+- name: Add docker repo key
+  become: true
+  apt_key:
+    keyserver: hkp://p80.pool.sks-keyservers.net:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+    state: present
+  retries: 5 # key server is unreliable
+
+- name: Add docker apt repo
+  become: true
+  apt_repository:
+    repo: "deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main"
+    state: present
+
+- name: Install docker engine
+  become: true
+  apt:
+    pkg: "docker-engine"
+    state: present
+
+- name: Make sure docker group is present
+  become: true
+  group: name=docker state=present
+
+- name: Add users to docker group
+  become: true
+  user:
+    name: "{{item}}"
+    groups: docker
+    append: yes
+  with_items:
+    - ubuntu
+    - apps
+    - vagrant
+  notify: Restart Docker
+
+- name: Install docker compose
+  become: true
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-{{ansible_system}}-{{ansible_architecture}}"
+    dest: /usr/local/bin/docker-compose
+    owner: root
+    group: root
+    mode: 0755
+
+- name: "Make sure docker is started"
+  become: true
+  service: name=docker state=started
+
+# make sure docker is restarted if needed before proceeding
+- meta: flush_handlers
