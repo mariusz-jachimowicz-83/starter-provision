@@ -2,6 +2,7 @@
 - hosts: @vm_name@
   vars:
     #---- postgres ---------------
+    docker_compose_version: 1.21.2
     ant_version: 1.9.3
     maven_version: 3.3.1
     #scala_version: 2.10.3
@@ -80,6 +81,7 @@
     # --------- DB ----------------------------------------
     # - { role: '@ansible_roles_path@postgres' }
     # - { role: '@ansible_roles_path@pgadmin3' }
+    # - { role: '@ansible_roles_path@pgadmin4' }
     # - { role: '@ansible_roles_path@mongo' }
     # - { role: '@ansible_roles_path@mysql' }
     # - { role: '@ansible_roles_path@mysql-workbench' }

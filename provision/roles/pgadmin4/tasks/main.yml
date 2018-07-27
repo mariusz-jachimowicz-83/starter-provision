@@ -1,0 +1,17 @@
+---
+- name: Add postgres4 install dependencies
+  become: true
+  apt:
+    pkg: "{{item}}"
+    state: present
+  with_items:
+    - virtualenv
+    - python-pip
+    - libpq-dev
+    - python-dev
+
+- name: install pgadmin4
+  sudo: true
+  apt: name={{ item }} state=latest
+  with_items:
+    - pgadmin4
