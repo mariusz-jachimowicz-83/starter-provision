@@ -1,6 +1,6 @@
 ---
 - name: download phantomjs
-  get_url: url=https://phantomjs.googlecode.com/files/{{ phantomjs }}.tar.bz2
+  get_url: url=https://bitbucket.org/ariya/phantomjs/downloads/{{ phantomjs }}.tar.bz2
            dest=/var/tmp/{{ phantomjs }}.tar.bz2
 - name: untar phantomjs
   shell: chdir=/var/tmp tar xjf {{ phantomjs }}.tar.bz2 creates=/var/tmp/{{ phantomjs }}
