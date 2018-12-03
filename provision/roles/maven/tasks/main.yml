@@ -1,21 +1,21 @@
 ---
 # nice example http://cn.soulmachine.me/blog/20140129/
-- name: Maven | Download v 3.5.4 into /opt/maven3.tar.gz
+- name: Maven | Download v 3.6.0 into /opt/maven3.tar.gz
   sudo: yes
-  get_url: dest=/opt/maven3.tar.gz url=http://ftp.ps.pl/pub/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+  get_url: dest=/opt/maven3.tar.gz url=http://ftp.man.poznan.pl/apache/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
 
 - name: Maven | Upack from /opt/maven3.tar.gz
   sudo: yes
-  action: command creates=/opt/apache-maven-3.5.4 chdir=/opt tar zxvf /opt/maven3.tar.gz
+  action: command creates=/opt/apache-maven-3.6.0 chdir=/opt tar zxvf /opt/maven3.tar.gz
 
 - name: Maven | unpacked maven exists?
   sudo: yes
-  stat: path=/opt/apache-maven-3.5.4
+  stat: path=/opt/apache-maven-3.6.0
   register: maven_unpacked_exists
 
 - name: Maven | Rename to /opt/maven
   sudo: yes
-  command: creates="/opt/maven" mv /opt/apache-maven-3.5.4 /opt/maven
+  command: creates="/opt/maven" mv /opt/apache-maven-3.6.0 /opt/maven
   when: maven_unpacked_exists.stat.exists
 
 # - name: Maven | Move to /usr/local/maven
