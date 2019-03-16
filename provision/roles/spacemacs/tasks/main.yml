@@ -1,0 +1,16 @@
+---
+
+- name: apt-get update
+  apt:
+    update_cache: "yes"
+  changed_when: false
+
+- name: Add elisp repository
+  apt_repository: repo=ppa:ubuntu-elisp/ppa state=present
+
+- name: Install Dependencies
+  apt: pkg={{item}} state=latest update_cache=true
+  with_items: [  emacs-snapshot emacs-snapshot-el ]
+
+- name: Install spacemacs
+  git: repo=git://github.com:syl20bnr/spacemacs.git accept_hostkey=yes dest=~/.emacs.d 

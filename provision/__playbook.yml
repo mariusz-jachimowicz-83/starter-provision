@@ -84,6 +84,7 @@
     # - { role: '@ansible_roles_path@postgres' }
     # - { role: '@ansible_roles_path@pgadmin3' }
     # - { role: '@ansible_roles_path@pgadmin4' }
+    # - { role: '@ansible_roles_path@pgadmin3_ubuntu16' }
     # - { role: '@ansible_roles_path@mongo' }
     # - { role: '@ansible_roles_path@mysql' }
     # - { role: '@ansible_roles_path@mysql-workbench' }
