@@ -56,8 +56,7 @@
     # - { role: '@ansible_roles_path@ruby',  sudo: false }
 
     # --------- java ----------------------------------------
-    # - { role: '@ansible_roles_path@jdk8' }
-    # - { role: '@ansible_roles_path@jdk7' }
+    # - { role: '@ansible_roles_path@jdk12' }
     # - { role: '@ansible_roles_path@maven' }
 
     # --------- clojure ----------------------------------------
