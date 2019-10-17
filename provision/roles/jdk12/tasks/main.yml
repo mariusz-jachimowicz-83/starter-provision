@@ -1,0 +1,33 @@
+---
+- name: Install JDK ppa
+  sudo: yes
+  action: apt_repository repo=ppa:linuxuprising/java
+
+- name: Update apt cache
+  apt: update_cache=yes
+ 
+- name: Set license as accepted
+  debconf:
+    name="oracle-java12-installer"
+    question="shared/accepted-oracle-license-v1-2"
+    value='true'
+    vtype='select'
+  become: yes
+ 
+- name: Install jdk pkg
+  sudo: yes
+  action: apt pkg=oracle-java12-installer state=present
+
+- name: Ensure Java is installed
+  apt:
+    name="oracle-java12-installer"
+    update_cache=yes
+  register: oracle_java_task_apt_install
+  become: yes
+
+- name: Set Java version as default
+  apt:
+    name="oracle-java12-set-default"
+    state=present
+  register: oracle_java_task_set_default
+  become: yes
