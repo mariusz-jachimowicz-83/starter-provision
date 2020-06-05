@@ -56,6 +56,7 @@
     # - { role: '@ansible_roles_path@ruby',  sudo: false }
 
     # --------- java ----------------------------------------
+    # - { role: '@ansible_roles_path@openjdk8' }
     # - { role: '@ansible_roles_path@jdk12' }
     # - { role: '@ansible_roles_path@maven' }
 
@@ -72,6 +73,9 @@
     # - { role: '@ansible_roles_path@bower' }
     # - { role: '@ansible_roles_path@gulp' }
     # - { role: '@ansible_roles_path@npm_upgrade' }
+
+    # --------- Ocaml ----------------------------------------
+    # - { role: '@ansible_roles_path@ocaml' }
 
     # --------- erlang ----------------------------------------
     # - { role: '@ansible_roles_path@erlang' }

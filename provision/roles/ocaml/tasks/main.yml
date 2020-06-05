@@ -1,0 +1,7 @@
+---
+- name: Add ocaml repository
+  apt_repository: repo=ppa:avsm/ppa
+
+- name: Install Ocaml and Opam
+  apt: pkg={{item}}
+  with_items: [ ocaml, opam ]

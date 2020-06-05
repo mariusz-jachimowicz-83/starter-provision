@@ -1,0 +1,5 @@
+---
+- name: Ensure OpenJDK 8 is installed.
+  apt:
+    name: openjdk-8-jdk
+    state: present
