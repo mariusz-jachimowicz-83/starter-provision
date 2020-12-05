@@ -1,0 +1,5 @@
+---
+- name: Install Sublime Text 3
+  snap:
+    name: sublime-text
+    classic: yes
