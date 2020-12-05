@@ -1,0 +1,150 @@
+---
+
+- name: Disable pinned Docker version
+  become: true
+  file:
+    dest: "/etc/apt/preferences.d/docker-ce.pref"
+    state: "absent"
+  when: docker__version == "" or docker__version == "latest"
+
+- name: Pin Docker version
+  become: true
+  template:
+    src: "etc/apt/preferences.d/docker-ce.pref.j2"
+    dest: "/etc/apt/preferences.d/docker-ce.pref"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  when: docker__version != "latest"
+
+- name: Install role dependencies
+  become: true
+  apt:
+    name: "{{ docker__package_dependencies }}"
+
+# - name: Pip install docker for Ansible's docker_login and docker_service modules
+#   become: true
+#   pip:
+#     name: "docker"
+
+- name: Add Docker's GPG key
+  become: true
+  apt_key:
+    id: "{{ docker__apt_key_id }}"
+    url: "{{ docker__apt_key_server }}"
+
+- name: Configure Docker's APT repository
+  become: true
+  apt_repository:
+    repo: "{{ docker__apt_repository }}"
+    update_cache: true
+
+- name: Install Docker
+  become: true
+  apt:
+    name: "docker-{{ docker__edition }}"
+
+- name: Create Docker configuration directories
+  become: true
+  file:
+    path: "{{ item }}"
+    state: "directory"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+  loop:
+    - "/etc/docker"
+    - "/etc/systemd/system/docker.service.d"
+
+- name: Configure Docker daemon options (json)
+  become: true
+  template:
+    src: "etc/docker/daemon.json.j2"
+    dest: "/etc/docker/daemon.json"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  when: docker__default_daemon_json or docker__daemon_json
+
+- name: Configure Docker daemon options (flags)
+  become: true
+  template:
+    src: "etc/systemd/system/docker.service.d/options.conf.j2"
+    dest: "/etc/systemd/system/docker.service.d/options.conf"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  register: docker__register_daemon_flags
+  when: docker__daemon_flags
+
+- name: Configure Docker daemon environment variables
+  become: true
+  template:
+    src: "etc/systemd/system/docker.service.d/environment.conf.j2"
+    dest: "/etc/systemd/system/docker.service.d/environment.conf"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  register: docker__register_daemon_environment
+  when: docker__daemon_environment
+
+- name: Configure custom systemd unit file override
+  become: true
+  template:
+    src: "etc/systemd/system/docker.service.d/custom.conf.j2"
+    dest: "/etc/systemd/system/docker.service.d/custom.conf"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  register: docker__register_custom_override
+  when: docker__systemd_override|default()
+
+- name: Reload systemd daemon
+  become: true
+  systemd:
+    daemon_reload: true
+  when: (docker__register_daemon_flags|default() and
+         docker__register_daemon_flags is changed)
+         or (docker__register_daemon_environment|default() and
+         docker__register_daemon_environment is changed)
+         or (docker__register_custom_override|default() and
+         docker__register_custom_override is changed)
+  notify: ["Restart Docker"]
+
+- name: Add user(s) to "docker" group
+  become: true
+  user:
+    name: "{{ item }}"
+    groups: "docker"
+    append: true
+  loop: "{{ docker__users }}"
+
+- name: Manage login credentials for 1 or more Docker registries
+  become: true
+  docker_login:
+    registry_url: "{{ item.registry_url|default(omit) }}"
+    username: "{{ item.username }}"
+    password: "{{ item.password }}"
+    email: "{{ item.email|default(omit)}}"
+    reauthorize: "{{ item.reauthorize|default(omit) }}"
+    state: "{{ item.state|default('present') }}"
+  loop: "{{ docker__registries }}"
+  when: item.username|default() and item.password|default()
+  become_user: "{{ item.system_user|default((docker__users|first)|default('root')) }}"
+  become: true
+
+- name: Remove Docker Compose
+  file:
+    path: "/usr/local/bin/docker-compose"
+    state: "absent"
+  when: not docker__install_docker_compose
+
+- name: Install Docker Compose
+  get_url:
+    url: "{{ docker__compose_download_url }}"
+    dest: "/usr/local/bin/docker-compose"
+    force: true
+    owner: "root"
+    group: "root"
+    mode: "0755"
+  when: docker__install_docker_compose
