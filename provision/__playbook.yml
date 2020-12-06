@@ -101,8 +101,9 @@
     # - { role: '@ansible_roles_path@sbt' }
 
     # --------- editors ----------------------------------------
-    # - { role: '@ansible_roles_path@sublime' }
     # - { role: '@ansible_roles_path@sublime_ubuntu_20' }
+    # - { role: '@ansible_roles_path@spacemacs_ubuntu_20' }
+    # - { role: '@ansible_roles_path@sublime' }
     # - { role: '@ansible_roles_path@intellij' }
     # - { role: '@ansible_roles_path@rubymine' }
     # - { role: '@ansible_roles_path@neovim' }

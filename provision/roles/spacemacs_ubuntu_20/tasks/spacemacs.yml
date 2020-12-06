@@ -1,0 +1,31 @@
+
+- name: Clone Spacemacs repo
+  vars:
+    url: "{{ spacemacs_url }}"
+    version: "{{ spacemacs_version }}"
+    username: "vagrant"
+  git:
+    repo: "{{ url }}"
+    dest: "~{{ username }}/.emacs.d"
+    version: "{{ version }}"
+    update: no
+
+- name: Get the Source Code Pro font
+  unarchive:
+    src: "{{ source_code_pro_url }}"
+    dest: /usr/local/src/
+    list_files: yes
+    remote_src: true
+  register: sourcecodepro_unarchive
+
+- name: Copy Source Code Pro to /usr/share/fonts
+  copy:
+    src: "{{ sourcecodepro_unarchive.dest }}{{ sourcecodepro_unarchive.files[0] }}OTF/"
+    dest: /usr/share/fonts/source-code-pro
+    remote_src: yes
+  when: sourcecodepro_unarchive.changed
+  register: sourcecodepro_copy
+
+- name: Update fc-cache for new font
+  command: fc-cache -fv
+  when: sourcecodepro_copy.changed

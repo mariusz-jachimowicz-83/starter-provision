@@ -1,0 +1,62 @@
+
+- name: Add source repository to apt
+  become: true
+  apt_repository:
+    repo: deb-src http://us.archive.ubuntu.com/ubuntu/ bionic main restricted
+
+- name: Install build dependencies for Emacs
+  become: true
+  apt:
+    name: emacs
+    state: build-dep
+
+- name: Install dependencies for Emacs
+  become: true
+  apt:
+    name:
+      - build-essential
+      - automake
+      - texinfo
+      - libjpeg-dev
+      - libncurses5-dev
+      - libtiff5-dev
+      - libgif-dev
+      - libpng-dev
+      - libxpm-dev
+      - libgtk-3-dev
+      - libgnutls28-dev
+
+- name: Unarchive Emacs source
+  become: true
+  unarchive:
+    src: '{{ emacs_url }}'
+    dest: '{{ emacs_parent_src_dir }}'
+    creates: '{{ emacs_src_dir }}'
+    remote_src: yes
+  register: emacs_unarchive
+
+- name: Configure Emacs build
+  become: true
+  command: ./configure --with-modules
+  args:
+    chdir: '{{ emacs_src_dir }}'
+    creates: '{{ emacs_src_dir }}/Makefile'
+  when: emacs_unarchive.changed
+  register: emacs_configure
+
+- name: Build Emacs
+  become: true
+  command: make -j{{ ansible_processor_vcpus }}
+  args:
+    chdir: '{{ emacs_src_dir }}'
+    creates: '{{ emacs_src_dir }}/src/emacs'
+  when: emacs_configure.changed
+  register: emacs_build
+
+- name: Install Emacs
+  become: true
+  command: make install
+  args:
+    chdir: '{{ emacs_src_dir }}'
+    creates: /usr/local/bin/emacs
+  when: emacs_build.changed
