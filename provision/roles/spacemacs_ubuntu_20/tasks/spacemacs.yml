@@ -29,3 +29,8 @@
 - name: Update fc-cache for new font
   command: fc-cache -fv
   when: sourcecodepro_copy.changed
+
+- name: Install silversearcher for heml-ag
+  become: true
+  apt:
+    name: "silversearcher-ag"
