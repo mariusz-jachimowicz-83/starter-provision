@@ -1,25 +1,25 @@
 ---
 # nice example http://cn.soulmachine.me/blog/20140129/
 - name: Maven | Download v 3.6.3 into /opt/maven3.tar.gz
-  sudo: yes
+  become: yes
   get_url: dest=/opt/maven3.tar.gz url=http://ftp.man.poznan.pl/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
 
 - name: Maven | Upack from /opt/maven3.tar.gz
-  sudo: yes
+  become: yes
   action: command creates=/opt/apache-maven-3.6.3 chdir=/opt tar zxvf /opt/maven3.tar.gz
 
 - name: Maven | unpacked maven exists?
-  sudo: yes
+  become: yes
   stat: path=/opt/apache-maven-3.6.3
   register: maven_unpacked_exists
 
 - name: Maven | Rename to /opt/maven
-  sudo: yes
+  become: yes
   command: creates="/opt/maven" mv /opt/apache-maven-3.6.3 /opt/maven
   when: maven_unpacked_exists.stat.exists
 
 # - name: Maven | Move to /usr/local/maven
-#   sudo: yes
+#   become: yes
 #   command: creates="/usr/local/share" mv /opt/maven /usr/local/share
 #   when: maven_unpacked_exists.stat.exists
 
@@ -34,13 +34,13 @@
 #   register: maven_local_exists
 
 - name: Maven | link exists?
-  sudo: yes
+  become: yes
   stat: path=/usr/bin/mvn
   register: maven_link_exists
 
 - name: Maven | Assign link
-  sudo: yes
-  command: sudo ln -s /opt/maven/bin/mvn /usr/bin/mvn
+  become: yes
+  command: ln -s /opt/maven/bin/mvn /usr/bin/mvn
   when: not maven_link_exists.stat.exists
 
 
