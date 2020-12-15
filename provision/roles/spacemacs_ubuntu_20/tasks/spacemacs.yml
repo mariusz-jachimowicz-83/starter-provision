@@ -1,5 +1,6 @@
 
 - name: Clone Spacemacs repo
+  become_user: vagrant
   vars:
     url: "{{ spacemacs_url }}"
     version: "{{ spacemacs_version }}"

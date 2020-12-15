@@ -6,5 +6,6 @@
     classic: yes
 
 - name: Install libtool for vterm
+  become: true
   apt:
     name: libtool-bin

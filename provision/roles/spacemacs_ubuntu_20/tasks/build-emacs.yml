@@ -27,7 +27,6 @@
       - libgnutls28-dev
 
 - name: Unarchive Emacs source
-  become: true
   unarchive:
     src: '{{ emacs_url }}'
     dest: '{{ emacs_parent_src_dir }}'
@@ -36,7 +35,6 @@
   register: emacs_unarchive
 
 - name: Configure Emacs build
-  become: true
   command: ./configure --with-modules
   args:
     chdir: '{{ emacs_src_dir }}'
@@ -45,7 +43,6 @@
   register: emacs_configure
 
 - name: Build Emacs
-  become: true
   command: make -j{{ ansible_processor_vcpus }}
   args:
     chdir: '{{ emacs_src_dir }}'
@@ -54,7 +51,7 @@
   register: emacs_build
 
 - name: Install Emacs
-  become: true
+  become: yes
   command: make install
   args:
     chdir: '{{ emacs_src_dir }}'
