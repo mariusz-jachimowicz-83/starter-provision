@@ -58,6 +58,7 @@
 
     # --------- java ----------------------------------------
     # - { role: '@ansible_roles_path@openjdk8' }
+    # - { role: '@ansible_roles_path@openjdk11' }
     # - { role: '@ansible_roles_path@jdk12' }
     # - { role: '@ansible_roles_path@maven' }
 
